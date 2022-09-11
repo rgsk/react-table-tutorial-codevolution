@@ -1,0 +1,5 @@
+Grouping
+In-line row editing
+Row drag and drop
+Column re-sizing
+React Table + Material UI
