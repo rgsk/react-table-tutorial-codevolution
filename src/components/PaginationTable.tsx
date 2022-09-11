@@ -26,7 +26,8 @@ const PaginationTable: React.FC<IPaginationTableProps> = ({}) => {
     canNextPage,
     canPreviousPage,
     pageOptions,
-    state: { pageIndex },
+    setPageSize,
+    state: { pageIndex, pageSize },
   } = useTable(
     {
       columns: COLUMNS,
@@ -85,6 +86,16 @@ const PaginationTable: React.FC<IPaginationTableProps> = ({}) => {
             }}
           />
         </span>
+        <select
+          value={pageSize}
+          onChange={(e) => setPageSize(Number(e.target.value))}
+        >
+          {[10, 20, 50].map((size) => (
+            <option key={size} value={size}>
+              Show {size}
+            </option>
+          ))}
+        </select>
         <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
           {"<<"}
         </button>
