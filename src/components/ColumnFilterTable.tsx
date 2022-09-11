@@ -9,12 +9,20 @@ import {
 import { COLUMNS, Person } from "./columns";
 import MOCK_DATA from "../MOCK_DATA.json";
 import "./table.css";
+import ColumnFilter from "./ColumnFilter";
+import { useMemo } from "react";
 
 export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
   UseFiltersInstanceProps<T>;
 
 interface IColumnFilterTableProps {}
 const ColumnFilterTable: React.FC<IColumnFilterTableProps> = ({}) => {
+  const defaultColumn = useMemo(
+    () => ({
+      Filter: ColumnFilter,
+    }),
+    []
+  );
   const {
     getTableProps,
     getTableBodyProps,
@@ -26,6 +34,7 @@ const ColumnFilterTable: React.FC<IColumnFilterTableProps> = ({}) => {
     {
       columns: COLUMNS,
       data: MOCK_DATA,
+      defaultColumn: defaultColumn as any,
     },
     useFilters
   ) as TableInstanceWithHooks<Person>;
