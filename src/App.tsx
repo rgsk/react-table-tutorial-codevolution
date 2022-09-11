@@ -1,7 +1,8 @@
+import ColumnFilterTable from "./components/ColumnFilterTable";
 import SortingTable from "./components/SortingTable";
 
 function App() {
-  return <SortingTable />;
+  return <ColumnFilterTable />;
 }
 
 export default App;

@@ -1,5 +1,6 @@
 import { format } from "date-fns";
-import { Column } from "react-table";
+import { Column, UseFiltersColumnOptions } from "react-table";
+import ColumnFilter from "./ColumnFilter";
 export type Person = {
   id: number;
   firstName: string;
@@ -10,26 +11,30 @@ export type Person = {
   country: string;
   phone: string;
 };
-export const COLUMNS: Column<Person>[] = [
+export const COLUMNS: (Column<Person> & UseFiltersColumnOptions<Person>)[] = [
   {
     Header: "Id",
     Footer: "Id",
     accessor: "id",
+    Filter: ColumnFilter,
   },
   {
     Header: "First Name",
     Footer: "First Name",
     accessor: "firstName",
+    Filter: ColumnFilter,
   },
   {
     Header: "Last Name",
     Footer: "Last Name",
     accessor: "lastName",
+    Filter: ColumnFilter,
   },
   {
     Header: "Email",
     Footer: "Email",
     accessor: "email",
+    Filter: ColumnFilter,
   },
   {
     Header: "Date Of Birth",
@@ -38,21 +43,25 @@ export const COLUMNS: Column<Person>[] = [
     Cell: ({ value }) => {
       return format(new Date(value), "dd/MM/yyyy") as any;
     },
+    Filter: ColumnFilter,
   },
   {
     Header: "Age",
     Footer: "Age",
     accessor: "age",
+    Filter: ColumnFilter,
   },
   {
     Header: "Country",
     Footer: "Country",
     accessor: "country",
+    Filter: ColumnFilter,
   },
   {
     Header: "Phone",
     Footer: "Phone",
     accessor: "phone",
+    Filter: ColumnFilter,
   },
 ];
 export const GROUPED_COLUMNS: Column<Person>[] = [

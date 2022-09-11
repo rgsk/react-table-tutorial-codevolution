@@ -1,21 +1,20 @@
 import {
   useTable,
-  useGlobalFilter,
   TableInstance,
-  UseGlobalFiltersState,
-  UseGlobalFiltersInstanceProps,
+  useFilters,
+  UseFiltersInstanceProps,
+  HeaderGroup,
+  UseFiltersColumnProps,
 } from "react-table";
 import { COLUMNS, Person } from "./columns";
 import MOCK_DATA from "../MOCK_DATA.json";
 import "./table.css";
 
 export type TableInstanceWithHooks<T extends object> = TableInstance<T> &
-  UseGlobalFiltersInstanceProps<T> & {
-    state: UseGlobalFiltersState<T>;
-  };
+  UseFiltersInstanceProps<T>;
 
-interface IFilteringTableProps {}
-const FilteringTable: React.FC<IFilteringTableProps> = ({}) => {
+interface IColumnFilterTableProps {}
+const ColumnFilterTable: React.FC<IColumnFilterTableProps> = ({}) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -23,14 +22,12 @@ const FilteringTable: React.FC<IFilteringTableProps> = ({}) => {
     rows,
     prepareRow,
     footerGroups,
-    state: { globalFilter },
-    setGlobalFilter,
   } = useTable(
     {
       columns: COLUMNS,
       data: MOCK_DATA,
     },
-    useGlobalFilter
+    useFilters
   ) as TableInstanceWithHooks<Person>;
 
   return (
@@ -42,16 +39,23 @@ const FilteringTable: React.FC<IFilteringTableProps> = ({}) => {
           alignItems: "center",
           justifyContent: "center",
         }}
-      >
-        <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
-      </div>
+      ></div>
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
-              ))}
+              {headerGroup.headers.map((_column) => {
+                const column = _column as HeaderGroup<Person> &
+                  UseFiltersColumnProps<Person>;
+                return (
+                  <th {...column.getHeaderProps()}>
+                    {column.render("Header")}
+                    <div>
+                      {column.canFilter ? column.render("Filter") : null}
+                    </div>
+                  </th>
+                );
+              })}
             </tr>
           ))}
         </thead>
@@ -82,17 +86,4 @@ const FilteringTable: React.FC<IFilteringTableProps> = ({}) => {
     </div>
   );
 };
-export default FilteringTable;
-
-interface IGlobalFilterProps {
-  filter: any;
-  setFilter: (filterValue: any) => void;
-}
-const GlobalFilter: React.FC<IGlobalFilterProps> = ({ filter, setFilter }) => {
-  return (
-    <span>
-      Search:{" "}
-      <input value={filter || ""} onChange={(e) => setFilter(e.target.value)} />
-    </span>
-  );
-};
+export default ColumnFilterTable;
