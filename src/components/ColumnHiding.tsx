@@ -3,6 +3,7 @@ import { COLUMNS } from "./columns";
 import MOCK_DATA from "../MOCK_DATA.json";
 import "./table.css";
 import Checkbox from "./Checkbox";
+import { useEffect, useRef } from "react";
 interface IColumnHidingProps {}
 const ColumnHiding: React.FC<IColumnHidingProps> = ({}) => {
   const {
@@ -18,10 +19,20 @@ const ColumnHiding: React.FC<IColumnHidingProps> = ({}) => {
     columns: COLUMNS,
     data: MOCK_DATA,
   });
+  const toggleAllInputRef = useRef<HTMLInputElement>(null);
+  const { indeterminate, ...toggleAllProps } = getToggleHideAllColumnsProps();
+  useEffect(() => {
+    if (toggleAllInputRef.current) {
+      toggleAllInputRef.current.indeterminate = !!indeterminate;
+    }
+  }, [indeterminate]);
   return (
     <div>
       <div>
-        <Checkbox {...getToggleHideAllColumnsProps()} /> Toggle All
+        {/* for below checkbox we have a indeterminate state ie. only some columns are visible */}
+        {/* react doesn't processes the indeterminate prop, so we have to pass it through ref */}
+        <input type="checkbox" ref={toggleAllInputRef} {...toggleAllProps} />{" "}
+        Toggle All
       </div>
       <div>
         {allColumns.map((column) => (
