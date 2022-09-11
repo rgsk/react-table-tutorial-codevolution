@@ -1,7 +1,7 @@
-import RowSelection from "./components/RowSelection";
+import ColumnOrder from "./components/ColumnOrder";
 
 function App() {
-  return <RowSelection />;
+  return <ColumnOrder />;
 }
 
 export default App;
