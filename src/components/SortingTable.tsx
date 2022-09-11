@@ -1,6 +1,6 @@
 import { useTable, useSortBy } from "react-table";
-import { COLUMNS } from "./columns";
 import MOCK_DATA from "../MOCK_DATA.json";
+import { COLUMNS } from "./columns";
 import "./table.css";
 interface ISortingTableProps {}
 const SortingTable: React.FC<ISortingTableProps> = ({}) => {

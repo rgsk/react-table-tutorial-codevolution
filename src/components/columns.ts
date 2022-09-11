@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { Column } from "react-table";
 type Person = {
   id: number;
@@ -34,6 +35,9 @@ export const COLUMNS: Column<Person>[] = [
     Header: "Date Of Birth",
     Footer: "Date Of Birth",
     accessor: "dateOfBirth",
+    Cell: ({ value }) => {
+      return format(new Date(value), "dd/MM/yyyy") as any;
+    },
   },
   {
     Header: "Age",
