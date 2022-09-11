@@ -1,7 +1,7 @@
-import ColumnOrder from "./components/ColumnOrder";
+import ColumnHiding from "./components/ColumnHiding";
 
 function App() {
-  return <ColumnOrder />;
+  return <ColumnHiding />;
 }
 
 export default App;
