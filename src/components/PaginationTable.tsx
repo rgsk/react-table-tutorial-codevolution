@@ -18,8 +18,9 @@ const PaginationTable: React.FC<IPaginationTableProps> = ({}) => {
     getTableBodyProps,
     headerGroups,
     prepareRow,
-    footerGroups,
     page,
+    gotoPage,
+    pageCount,
     nextPage,
     previousPage,
     canNextPage,
@@ -60,15 +61,41 @@ const PaginationTable: React.FC<IPaginationTableProps> = ({}) => {
           })}
         </tbody>
       </table>
-      <div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          padding: 20,
+        }}
+      >
         <span>
           Page: {pageIndex + 1} of {pageOptions.length}{" "}
         </span>
+        <span>&nbsp; | &nbsp;</span>
+        <span>
+          Go to page:{" "}
+          <input
+            type="number"
+            defaultValue={pageIndex + 1}
+            onChange={(e) => {
+              const pageNumber = e.target.value
+                ? Number(e.target.value) - 1
+                : 0;
+              gotoPage(pageNumber);
+            }}
+          />
+        </span>
+        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {"<<"}
+        </button>
         <button onClick={previousPage} disabled={!canPreviousPage}>
-          previous
+          Previous
         </button>
         <button onClick={nextPage} disabled={!canNextPage}>
-          next
+          Next
+        </button>
+        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          {">>"}
         </button>
       </div>
     </div>
