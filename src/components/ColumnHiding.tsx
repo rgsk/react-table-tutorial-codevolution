@@ -2,7 +2,6 @@ import { useTable } from "react-table";
 import { COLUMNS } from "./columns";
 import MOCK_DATA from "../MOCK_DATA.json";
 import "./table.css";
-import Checkbox from "./Checkbox";
 import { useEffect, useRef } from "react";
 interface IColumnHidingProps {}
 const ColumnHiding: React.FC<IColumnHidingProps> = ({}) => {

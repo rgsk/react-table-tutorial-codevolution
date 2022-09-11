@@ -1,7 +1,7 @@
-import ColumnHiding from "./components/ColumnHiding";
+import StickyTable from "./components/StickyTable";
 
 function App() {
-  return <ColumnHiding />;
+  return <StickyTable />;
 }
 
 export default App;
