@@ -1,8 +1,7 @@
-import React from "react";
-import BasicTable from "./components/BasicTable";
+import SortingTable from "./components/SortingTable";
 
 function App() {
-  return <BasicTable />;
+  return <SortingTable />;
 }
 
 export default App;

@@ -1,9 +1,9 @@
 import { useTable } from "react-table";
-import { COLUMNS } from "./columns";
+import { GROUPED_COLUMNS } from "./columns";
 import MOCK_DATA from "../MOCK_DATA.json";
 import "./table.css";
-interface IBasicTableProps {}
-const BasicTable: React.FC<IBasicTableProps> = ({}) => {
+interface IGroupedHeadersTableProps {}
+const GroupedHeadersTable: React.FC<IGroupedHeadersTableProps> = ({}) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -12,7 +12,7 @@ const BasicTable: React.FC<IBasicTableProps> = ({}) => {
     prepareRow,
     footerGroups,
   } = useTable({
-    columns: COLUMNS,
+    columns: GROUPED_COLUMNS,
     data: MOCK_DATA,
   });
   return (
@@ -54,4 +54,4 @@ const BasicTable: React.FC<IBasicTableProps> = ({}) => {
     </div>
   );
 };
-export default BasicTable;
+export default GroupedHeadersTable;

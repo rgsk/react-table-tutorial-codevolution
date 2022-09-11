@@ -1,9 +1,9 @@
-import { useTable } from "react-table";
+import { useTable, useSortBy } from "react-table";
 import { COLUMNS } from "./columns";
 import MOCK_DATA from "../MOCK_DATA.json";
 import "./table.css";
-interface IBasicTableProps {}
-const BasicTable: React.FC<IBasicTableProps> = ({}) => {
+interface ISortingTableProps {}
+const SortingTable: React.FC<ISortingTableProps> = ({}) => {
   const {
     getTableProps,
     getTableBodyProps,
@@ -11,10 +11,13 @@ const BasicTable: React.FC<IBasicTableProps> = ({}) => {
     rows,
     prepareRow,
     footerGroups,
-  } = useTable({
-    columns: COLUMNS,
-    data: MOCK_DATA,
-  });
+  } = useTable(
+    {
+      columns: COLUMNS,
+      data: MOCK_DATA,
+    },
+    useSortBy
+  );
   return (
     <div>
       <table {...getTableProps()}>
@@ -22,7 +25,20 @@ const BasicTable: React.FC<IBasicTableProps> = ({}) => {
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+                <th
+                  {...column.getHeaderProps(
+                    (column as any).getSortByToggleProps()
+                  )}
+                >
+                  {column.render("Header")}
+                  <span>
+                    {(column as any).isSorted
+                      ? (column as any).isSortedDesc
+                        ? " 🔽"
+                        : " 🔼"
+                      : ""}
+                  </span>
+                </th>
               ))}
             </tr>
           ))}
@@ -54,4 +70,4 @@ const BasicTable: React.FC<IBasicTableProps> = ({}) => {
     </div>
   );
 };
-export default BasicTable;
+export default SortingTable;
