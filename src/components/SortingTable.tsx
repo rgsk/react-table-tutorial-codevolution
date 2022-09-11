@@ -1,7 +1,13 @@
-import { useTable, useSortBy } from "react-table";
+import {
+  useTable,
+  useSortBy,
+  HeaderGroup,
+  UseSortByColumnProps,
+} from "react-table";
 import MOCK_DATA from "../MOCK_DATA.json";
-import { COLUMNS } from "./columns";
+import { COLUMNS, Person } from "./columns";
 import "./table.css";
+
 interface ISortingTableProps {}
 const SortingTable: React.FC<ISortingTableProps> = ({}) => {
   const {
@@ -24,22 +30,22 @@ const SortingTable: React.FC<ISortingTableProps> = ({}) => {
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th
-                  {...column.getHeaderProps(
-                    (column as any).getSortByToggleProps()
-                  )}
-                >
-                  {column.render("Header")}
-                  <span>
-                    {(column as any).isSorted
-                      ? (column as any).isSortedDesc
-                        ? " 🔽"
-                        : " 🔼"
-                      : ""}
-                  </span>
-                </th>
-              ))}
+              {headerGroup.headers.map((_column) => {
+                const column = _column as HeaderGroup<Person> &
+                  UseSortByColumnProps<Person>;
+                return (
+                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                    {column.render("Header")}
+                    <span>
+                      {column.isSorted
+                        ? column.isSortedDesc
+                          ? " 🔽"
+                          : " 🔼"
+                        : ""}
+                    </span>
+                  </th>
+                );
+              })}
             </tr>
           ))}
         </thead>

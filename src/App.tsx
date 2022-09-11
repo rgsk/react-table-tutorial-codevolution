@@ -1,7 +1,7 @@
-import FilteringTable from "./components/FilteringTable";
+import SortingTable from "./components/SortingTable";
 
 function App() {
-  return <FilteringTable />;
+  return <SortingTable />;
 }
 
 export default App;
