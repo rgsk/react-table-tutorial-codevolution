@@ -1,7 +1,7 @@
-import PaginationTable from "./components/PaginationTable";
+import RowSelection from "./components/RowSelection";
 
 function App() {
-  return <PaginationTable />;
+  return <RowSelection />;
 }
 
 export default App;
