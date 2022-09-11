@@ -1,5 +1,5 @@
 import { useTable } from "react-table";
-import { COLUMNS } from "./columns";
+import { COLUMNS, GROUPED_COLUMNS } from "./columns";
 import MOCK_DATA from "../MOCK_DATA.json";
 import "./table.css";
 interface IBasicTableProps {}
@@ -12,7 +12,7 @@ const BasicTable: React.FC<IBasicTableProps> = ({}) => {
     prepareRow,
     footerGroups,
   } = useTable({
-    columns: COLUMNS,
+    columns: GROUPED_COLUMNS,
     data: MOCK_DATA,
   });
   return (

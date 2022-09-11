@@ -26,3 +26,7 @@ tfoot td {
   background-color: #04aa6d;
   color: white;
 }
+
+tfoot td {
+  font-weight: bold;
+}

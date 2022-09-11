@@ -51,3 +51,47 @@ export const COLUMNS: Column<Person>[] = [
     accessor: "phone",
   },
 ];
+export const GROUPED_COLUMNS: Column<Person>[] = [
+  {
+    Header: "Id",
+    Footer: "Id",
+    accessor: "id",
+  },
+  {
+    Header: "Name",
+    Footer: "Name",
+    columns: [
+      {
+        Header: "First Name",
+        Footer: "First Name",
+        accessor: "firstName",
+      },
+      {
+        Header: "Last Name",
+        Footer: "Last Name",
+        accessor: "lastName",
+      },
+    ],
+  },
+  {
+    Header: "Info",
+    Footer: "Info",
+    columns: [
+      {
+        Header: "Date Of Birth",
+        Footer: "Date Of Birth",
+        accessor: "dateOfBirth",
+      },
+      {
+        Header: "Country",
+        Footer: "Country",
+        accessor: "country",
+      },
+      {
+        Header: "Phone",
+        Footer: "Phone",
+        accessor: "phone",
+      },
+    ],
+  },
+];
