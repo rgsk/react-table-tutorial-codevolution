@@ -1,8 +1,7 @@
-import ColumnFilterTable from "./components/ColumnFilterTable";
-import SortingTable from "./components/SortingTable";
+import PaginationTable from "./components/PaginationTable";
 
 function App() {
-  return <ColumnFilterTable />;
+  return <PaginationTable />;
 }
 
 export default App;
